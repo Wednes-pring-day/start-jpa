@@ -11,9 +11,7 @@ class UserRepositoryTest {
 
     @Test
     void crud() {
-        // delect()는 인자로 null을 가질 수 없기 때문에 예외처리
-        userRepository.delete(userRepository.findById(1L).orElseThrow(RuntimeException::new));
-
-        userRepository.deleteById(2L); // 조회 1번, 삭제 1번
+        userRepository.deleteAll(); // findAll - 각 row 마다 delete 쿼리 : 총 다섯번
+        userRepository.findAll().forEach(System.out::println);
     }
 }

@@ -11,12 +11,9 @@ class UserRepositoryTest {
 
     @Test
     void crud() {
-        long count = userRepository.count();
-        System.out.println(count); // 5
+        // delect()는 인자로 null을 가질 수 없기 때문에 예외처리
+        userRepository.delete(userRepository.findById(1L).orElseThrow(RuntimeException::new));
 
-        boolean exists = userRepository.existsById(1L); //  count 쿼리로 구현되어있다. 값이 1인지 아닌지로 구분.
-
-        System.out.println(exists);
-
+        userRepository.deleteById(2L); // 조회 1번, 삭제 1번
     }
 }

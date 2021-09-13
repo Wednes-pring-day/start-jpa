@@ -5,6 +5,7 @@ import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,18 +15,9 @@ class UserRepositoryTest {
     UserRepository userRepository;
 
     @Test
+    @Transactional
     void crud() {
-        // 원래는 이런 식으로 arraylist 를 생성해야한다.
-
-        /*
-         List<Long> ids = new ArrayList<>();
-         ids.add(1L);
-         ids.add(2L);
-         ids.add(3L);
-         */
-
-        // 하지만 번거롭기 때문에 테스트라이브러리를 사용한다.
-        List<User> users = userRepository.findAllById(Lists.newArrayList(1L, 3L, 5L));
-        users.forEach(System.out::println);
+        User user = userRepository.getOne(1L);
+        System.out.println(user);
     }
 }

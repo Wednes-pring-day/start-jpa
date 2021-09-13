@@ -1,10 +1,10 @@
 package com.fastcampas.jpa.bookmanager.repository;
 
 import com.fastcampas.jpa.bookmanager.domain.User;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -15,7 +15,17 @@ class UserRepositoryTest {
 
     @Test
     void crud() {
-        List<User> users = userRepository.findAll(Sort.by(Sort.Direction.DESC, "name")); // 이름 역순으로 조회
+        // 원래는 이런 식으로 arraylist 를 생성해야한다.
+
+        /*
+         List<Long> ids = new ArrayList<>();
+         ids.add(1L);
+         ids.add(2L);
+         ids.add(3L);
+         */
+
+        // 하지만 번거롭기 때문에 테스트라이브러리를 사용한다.
+        List<User> users = userRepository.findAllById(Lists.newArrayList(1L, 3L, 5L));
         users.forEach(System.out::println);
     }
 }
